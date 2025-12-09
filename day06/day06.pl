@@ -54,7 +54,7 @@ sub part2 {
     my $count = 0;
 
     my $last_row_no_leading_op = substr( $input->[-1], 1, length $input->[-1] );
-    my @last_row_whitespaces   = split /[^\s]/x, $last_row;
+    my @last_row_whitespaces   = split /[^\s]/x, $last_row_no_leading_op;
     my @column_sizes           = map { length } @last_row_whitespaces;
     my @char_lines             = map { [ split //x ] } @$input;
     my @ops                    = split /\s+/x, $input->[-1];
@@ -101,7 +101,7 @@ sub part2 {
 
 sub main {
     my $input = Util::read_file( "day06.input" );
-    my $grid  = Util::grid( $input );
+    my $grid  = Util::grid( $input, "\\s+" );
     my $lines = Util::lines( $input );
 
     my $part1 = part1( $grid );

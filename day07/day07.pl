@@ -111,7 +111,7 @@ sub print_grid {
 
 sub main {
     my $input = Util::read_file( "day07.input" );
-    my $lines = Util::grid( $input, "" );
+    my $lines = Util::grid( $input );
 
     # Do part2 first because we mutate the grid in part 1
     my $part2 = part2( $lines );

@@ -10,7 +10,7 @@ Util - My AoC utils
 
     my $input = Util::read_file( "input.txt" );
     my $lines = Util::lines( $input );
-    my $grid  = Util::grid( $input );
+    my $grid  = Util::grid( $input, $delim );
 
 =head1 DESCRIPTION
 
@@ -68,7 +68,7 @@ Convert a string into an array split on newlines and each row is split on whites
     seven eight nine
     EOF;
 
-    my $grid = Util::grid( $str );
+    my $grid = Util::grid( $str, "\\s+" );
     # [
     #   ["one", "two", "three"],
     #   ["four", "five", "six"],
@@ -79,7 +79,7 @@ Convert a string into an array split on newlines and each row is split on whites
 
 sub grid {
     my $input     = shift;
-    my $delimiter = shift // "\\s+";
+    my $delimiter = shift // "";
     my $lines     = lines( $input );
     my @grid      = map { [ split /$delimiter/x ] } @$lines;
 

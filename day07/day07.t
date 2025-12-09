@@ -32,12 +32,12 @@ INPUT
 }
 
 subtest 'Day 01 Part 1' => sub {
-    my $input = Util::grid( test_input(), "" );
+    my $input = Util::grid( test_input() );
     is( part1( $input ), 21, 'Correct result' );
 };
 
 subtest 'Day 01 Part 2' => sub {
-    my $input = Util::grid( test_input(), "" );
+    my $input = Util::grid( test_input() );
     is( part2( $input ), 40, 'Correct result' );
 };
 
