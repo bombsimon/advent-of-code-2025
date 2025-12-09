@@ -47,12 +47,12 @@ sub part2 {
 
     my ( $sx, $sy ) = ( 0, 0 );
 
-  FIND: foreach my $x ( 0 .. $#{$input} ) {
+  FIND_START: foreach my $x ( 0 .. $#{$input} ) {
         foreach my $y ( 0 .. $#{ $input->[$x] } ) {
             my $val = $input->[$x]->[$y];
             if ( $val eq "S" ) {
                 ( $sx, $sy ) = ( $x, $y );
-                last FIND;
+                last FIND_START;
             }
         }
     }
@@ -72,25 +72,23 @@ sub traverse_from {
 
     my $paths = 0;
 
-    if ( $cache->{"$x,$y"} ) {
-        return $cache->{"$x,$y"};
+    if ( $cache->{$x}->{$y} ) {
+        return $cache->{$x}->{$y};
     }
 
-    my $next = $input->[ $x + 1 ]->[$y] // "";
+    my $next = $input->[ $x + 1 ]->[$y];
     return 1 unless $next;
 
     if ( $next eq "." ) {
         return traverse_from( $input, $x + 1, $y, $cache );
     }
-    elsif ( $next eq "^" ) {
+
+    if ( $next eq "^" ) {
         $paths += traverse_from( $input, $x + 1, $y - 1, $cache );
         $paths += traverse_from( $input, $x + 1, $y + 1, $cache );
     }
-    else {
-        say "nothing ('$next') at x=$x,y=$y";
-    }
 
-    $cache->{"$x,$y"} = $paths;
+    $cache->{$x}->{$y} = $paths;
 
     return $paths;
 }
