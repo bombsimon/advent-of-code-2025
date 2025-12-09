@@ -78,9 +78,10 @@ Convert a string into an array split on newlines and each row is split on whites
 =cut
 
 sub grid {
-    my $input = shift;
-    my $lines = lines( $input );
-    my @grid  = map { [ split /\s+/x ] } @$lines;
+    my $input     = shift;
+    my $delimiter = shift // "\\s+";
+    my $lines     = lines( $input );
+    my @grid      = map { [ split /$delimiter/x ] } @$lines;
 
     return \@grid;
 }
